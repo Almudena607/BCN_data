@@ -1,9 +1,9 @@
-from fastapi import ApiRouter
+from fastapi import APIRouter
 from Database.mongodb import db
 from bson import json_util
 from json import loads
 
-router = ApiRouter()
+router = APIRouter()
 
 #este router devuelve la info de los 5 primeros migrantes
 @router.get("/all/Immigrants")

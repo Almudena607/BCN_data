@@ -1,9 +1,9 @@
-from fastapi import ApiRouter
+from fastapi import APIRouter
 from Database.mongodb import db
 from bson import json_util
 from json import loads
 
-router = ApiRouter()
+router = APIRouter()
 
 @router.get("/all/Unemployment")
 def get_unemployment():
