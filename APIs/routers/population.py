@@ -8,5 +8,5 @@ router = APIRouter()
 #este router devuelve la info de las primeras filas de población
 @router.get("/all/Population")
 def get_population():
-    res = list(db["Population"].find({}))[5]
+    res = get_data("Population")
     return loads(json_util.dumps(res))

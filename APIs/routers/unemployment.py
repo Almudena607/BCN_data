@@ -7,5 +7,5 @@ router = ApiRouter()
 
 @router.get("/all/Unemployment")
 def get_unemployment():
-    res = list(db["Unemployment"].find({}))[5]
+    res = get_data("Unemployment")
     return loads(json_util.dumps(res))
