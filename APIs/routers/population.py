@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from Database.mongodb import db
+from database.mongodb import db, get_data
 from bson import json_util
 from json import loads
 
