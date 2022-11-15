@@ -2,5 +2,12 @@
 
 Relación de gente inmigrante y de gente desempleada en los distintos barrios y distritos de Barcelona con respecto a la población total.
 
-Teniendo en cuenta la población total por barrio y distrito, y dado un año determinado, representación de la población inmigrante (teniendo en cuenta su nacionalidad) y de la población desempleada. 
+Teniendo en cuenta la población total por barrio y distrito, y dado un año determinado, representación de la población inmigrante (teniendo en cuenta su nacionalidad) y de la población desempleada.
 
+## Como se ejecuta el proyecto
+
+Abrir terminal y ejecutar el fichero `run_api.sh`
+
+```bash
+./run_api.sh
+```
