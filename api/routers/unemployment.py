@@ -1,6 +1,7 @@
 from fastapi import APIRouter
 from database.mongodb import find_collection, paginate
-
+from bson import json_util
+from json import loads
 
 router = APIRouter()
 
@@ -24,43 +25,32 @@ def get_unemployment(num_page: int = 0):
 
 
 # information of the unemployment in BCN depending on the neighborhood
-
-@router.get("/unemployment/{neighborhood}")
-def neig_unemployment(neigborhood = str):
-    res = find_collection("Unemployment", {"Neighborhood Name": neigborhood})
-    return get_unemployment(res)
+@router.get("/neighborhood/unemployment/{neighborhood}")
+def neig_unemployment(neighborhood: int, num_page: int = 0):
+    res = find_collection("Unemployment", {"Neighborhood Code": neighborhood})
+    page = paginate(num_page)
+    return loads(json_util.dumps(page(res)))
 
 
 # information of the unemployment in BCN depending on the district
-
-@router.get("/unemployment/{district}")
-def district_unemployment(district = str):
-    res = find_collection("Unemployment", {"District Name": district})
-    return get_unemployment(res)
+@router.get("/district/unemployment/{district}")
+def district_unemployment(district: int, num_page: int = 0):
+    res = find_collection("Unemployment", {"District Code": district})
+    page = paginate(num_page)
+    return loads(json_util.dumps(page(res)))
 
 
 # information of the unemployment in BCN depending on their gender
-
-@router.get("/unemployment/{gender}")
-def gender_unemployment(gender = str):
+@router.get("/gender/unemployment/{gender}")
+def gender_unemployment(gender: str, num_page: int = 0):
     res = find_collection("Unemployment", {"Gender": gender})
-    return get_unemployment(res)
+    page = paginate(num_page)
+    return loads(json_util.dumps(page(res)))
 
 # information of the unemployment in BCN depending on the demand occupation
-
-@router.get("/unemployment/{demand_occupation}")
-def occupation_unemployment(demand_occupation = str):
+@router.get("/demand_occupation/unemployment/{demand_occupation}")
+def occupation_unemployment(demand_occupation: str, num_page: int = 0):
     res = find_collection("Unemployment", {"Demand_occupation": demand_occupation})
-    return get_unemployment(res)
-
-
-# filter depending on the year and the month of the data
-
-@router.get("/unemployment/{year}/{month}")
-def year_month(year = int, month = str):
-    res = find_collection("Unemployment", 
-        {"$and":
-        [{"Year": year}, 
-        {"Month": month}]})
-    return get_unemployment(res)
+    page = paginate(num_page)
+    return loads(json_util.dumps(page(res)))
 
