@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from routers import immigrants, population, unemployment
+from routers import immigrants, population, unemployment, neighborhoods
 
 app = FastAPI()
 
@@ -7,6 +7,7 @@ app = FastAPI()
 app.include_router(immigrants.router)
 app.include_router(population.router)
 app.include_router(unemployment.router)
+app.include_router(neighborhoods.router)
 
 @app.get("/")
 def raiz():

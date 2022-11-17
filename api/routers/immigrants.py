@@ -1,5 +1,6 @@
-from fastapi import FastAPI, HTTPException, APIRouter
+from fastapi import  HTTPException, APIRouter
 from database.mongodb import find_collection, paginate
+
 
 router = APIRouter()
 
@@ -27,31 +28,38 @@ def get_immigrants(num_page: int = 0):
 
 # information of the immigrants in BCN depending on the neighborhood
 
-@router.get("/immigrants/{neighborhood}")
-def neig_immigrants(neigborhood = str):
-    res = find_collection("Immigrants", {"Neighborhood Name": neigborhood})
-    return get_immigrants(res)
+@router.get("/neighborhood/immigrants/{neighborhood}")
+def neig_immigrants(neigborhood: int):
+    res = find_collection("Immigrants", {"Neighborhood Code": neigborhood})
+    return res
 
 
 # information of the immigrants in BCN depending on the district
 
 @router.get("/immigrants/{district}")
-def district_immigrants(district = str):
-    res = find_collection("Immigrants", {"District Name": district})
-    return get_immigrants(res)
+def district_immigrants(district: int):
+    res = find_collection("Immigrants", {"District Code": district})
+    return res
+
+"""@router.get("/immigrants/{district}")
+def district_immigrants(district:int):
+    filt = {"District Code": district}
+    total = list(db["Immigrants"].find(filt, {}))
+    return loads(json_util.dumps(total))"""
+
 
 
 # information of the immigrants in BCN depending on their nationality
 
 @router.get("/immigrants/{nationality}")
-def nationality_immigrants(nationality = str):
+def nationality_immigrants(nationality: str):
     res = find_collection("Immigrants", {"Nationality": nationality})
     return get_immigrants(res)
 
 
 # filter depending on the year of the data
 @router.get("/immigrants/{year}/{neigborhood}")
-def year_neig(year = int, neigborhood = str):
+def year_neig(year: int, neigborhood: str):
     res = find_collection("Immigrants", {
         "$and":
         [{"Year": year}, 
@@ -59,7 +67,7 @@ def year_neig(year = int, neigborhood = str):
     return get_immigrants(res)
 
 @router.get("/immigrants/{year}/{district}")
-def year_district(year = int, district = str):
+def year_district(year: int, district: str):
     res = find_collection("Immigrants", 
         {"$and":
         [{"Year": year}, 
@@ -68,7 +76,7 @@ def year_district(year = int, district = str):
 
 
 @router.get("/immigrants/{year}/{nationality}")
-def year_nationality(year = int, nationality = str):
+def year_nationality(year: int, nationality: str):
     res = find_collection("Immigrants", 
         {"$and":
         [{"Year": year}, 
