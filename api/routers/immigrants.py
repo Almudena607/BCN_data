@@ -1,5 +1,5 @@
 from fastapi import  HTTPException, APIRouter
-from database.mongodb import find_collection, paginate
+from database.mongodb import db, find_collection, paginate
 from bson import json_util
 from json import loads
 
@@ -26,9 +26,14 @@ def get_immigrants(num_page: int = 0):
     res = page(find_collection("Immigrants"))
     return res
 
+"""#returns the nationalities of the immigrants
+@router.get("/immigrant/nation_list")
+def distinct_nationality():
+    res = db["Immigrants"].find({}).distinct("Nationality")
+    return loads(json_util.dumps(res))
+"""
 
 # information of the immigrants in BCN depending on the neighborhood
-
 @router.get("/neighborhood/immigrants/{neighborhood}")
 def neig_immigrants(neighborhood: int, num_page: int = 0):
     res = find_collection("Immigrants", {"Neighborhood Code": neighborhood})
@@ -37,7 +42,6 @@ def neig_immigrants(neighborhood: int, num_page: int = 0):
 
 
 # information of the immigrants in BCN depending on the district
-
 @router.get("/district/immigrants/{district}")
 def district_immigrants(district: int, num_page: int = 0):
     res = find_collection("Immigrants", {"District Code": district})
@@ -46,7 +50,6 @@ def district_immigrants(district: int, num_page: int = 0):
 
 
 # information of the immigrants in BCN depending on their nationality
-
 @router.get("/nationality/immigrants/{nationality}")
 def nationality_immigrants(nationality: str, num_page: int = 0):
     res = find_collection("Immigrants", {"Nationality": nationality})

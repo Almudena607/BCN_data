@@ -1,5 +1,5 @@
 from fastapi import  HTTPException, APIRouter
-from database.mongodb import find_collection, paginate
+from database.mongodb import db, find_collection, paginate
 from bson import json_util
 from json import loads
 
@@ -25,19 +25,22 @@ def get_neighborhoods(num_page: int = 0):
 
 
 @router.get("/totalimmigrants/{neighborhood}")
-def total_immigrants(neighborhood: str, num_page: int = 0):
+def total_immigrants(neighborhood: str):
     res = find_collection("Neighborhoods", {"_id": neighborhood}, {"Total Immigrants": 1})
-    page = paginate(num_page)
-    return loads(json_util.dumps(page(res)))
+    return loads(json_util.dumps(res))
 
 @router.get("/totalunemployed/{neighborhood}")
-def total_unemployed(neighborhood: str, num_page: int = 0):
+def total_unemployed(neighborhood: str):
     res = find_collection("Neighborhoods", {"_id": neighborhood}, {"Total Unemployed": 1})
-    page = paginate(num_page)
-    return loads(json_util.dumps(page(res)))
+    return loads(json_util.dumps(res))
 
 @router.get("/totalpopulation/{neighborhood}")
-def total_population(neighborhood: str, num_page: int = 0):
+def total_population(neighborhood: str):
     res = find_collection("Neighborhoods", {"_id": neighborhood}, {"Total Population": 1})
-    page = paginate(num_page)
-    return loads(json_util.dumps(page(res)))
+    return loads(json_util.dumps(res))
+
+#muestra el nombre de cada uno de los barrios
+@router.get("/neighborhood/all")
+def distinct_neighborhood():
+    res = db["Neighborhoods"].find({}).distinct("_id")
+    return loads(json_util.dumps(res))
