@@ -6,7 +6,7 @@ from json import loads
 router = APIRouter()
 
 
-@router.get("/neighborhoods")
+@router.get("/neighborhoods/{num_page}")
 def get_neighborhoods(num_page: int = 0):
     print(f"Fetching page {num_page}")
 
@@ -20,9 +20,8 @@ def get_neighborhoods(num_page: int = 0):
     page = paginate(num_page)
 
     # Fetch page data
-    res = page(find_collection("Neighborhoods"))
+    res = page(find_collection("Neighborhoods", {}, {"Total Immigrants": 1, "Total Unemployed": 1,"Total Population": 1, "_id": 1})),
     return res
-
 
 @router.get("/totalimmigrants/{neighborhood}")
 def total_immigrants(neighborhood: str):
@@ -44,3 +43,5 @@ def total_population(neighborhood: str):
 def distinct_neighborhood():
     res = db["Neighborhoods"].find({}).distinct("_id")
     return loads(json_util.dumps(res))
+
+
