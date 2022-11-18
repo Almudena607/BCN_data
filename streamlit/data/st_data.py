@@ -1,12 +1,21 @@
 import requests
 
-url = "http://0.0.0.0:8000"
+STURL="http://localhost:8000"
 
-def get_total_immigrants():
-    return requests.get(url + "/totalimmigrants/{neighborhood}").json()
+def get_neighborhoods():
+    return requests.get(STURL + "/neighborhoods").json
+    
+def get_total_immigrants(neighborhood):
+    return requests.get(STURL + f"/totalimmigrants/{neighborhood}").json()
 
-def get_total_unemployed():
-    return requests.get(url + "/totalunemployed/{neighborhood}").json()
+def get_total_unemployed(neighborhood):
+    return requests.get(STURL + f"/totalunemployed/{neighborhood}").json()
 
-def get_total():
-    return requests.get(url + "/totalpopulation/{neighborhood}").json()
+def get_total(neighborhood):
+    return requests.get(STURL + f"/totalpopulation/{neighborhood}").json()
+
+def all_neigh():
+    return requests.get(STURL + "/neighborhood/all").json()
+
+def immigrants_nationality(nationality):
+    return requests.get(STURL + f"/nationality/immigrants/{nationality}").json()
