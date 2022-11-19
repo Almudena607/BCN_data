@@ -1,14 +1,28 @@
 import streamlit as st
-from data.st_data import all_neigh, get_total, get_total_immigrants, get_total_unemployed
-import pandas as pd
+from data.graphs import  total_barrio, data_fr, sub_pl, graph_facil, desempl_barrio, inmi_barrio
 
-pf = pd.DataFrame()
 
 
 def conclus_page():
-    barrio = st.selectbox("Select one neigborhood to search", all_neigh())
-    data = get_total_immigrants(barrio)
-    st.write(data)
+    def title(text,size,color):
+        st.markdown(f'<h1 style="font-weight:bolder;font-size:{size}px;color:{color};text-align:center;">{text}</h1>',unsafe_allow_html=True)
+
+        title("Conclusiones", 35, "white")
+        
+    st.text("blah blah blah")
+
+
+    #presentación datos en gráficos
+    data_fr()
+    graph_facil()
+
+    desempl_barrio()
+    inmi_barrio()
+    total_barrio()
+
+    sub_pl()
+
+
 
 
 

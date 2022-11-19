@@ -2,6 +2,9 @@ import requests
 
 STURL="http://localhost:8000"
 
+def get_immigrants_nationality(nationality):
+    return requests.get(STURL + f"/nationality/immigrants/{nationality}").json()
+
 def get_neighborhoods(num_page):
     return requests.get(STURL + f"/neighborhoods/{num_page}").json()
     
