@@ -26,16 +26,16 @@ def get_unemployment(num_page: int = 0):
 
 # information of the unemployment in BCN depending on the neighborhood
 @router.get("/neighborhood/unemployment/{neighborhood}")
-def neig_unemployment(neighborhood: int, num_page: int = 0):
-    res = find_collection("Unemployment", {"Neighborhood Code": neighborhood})
+def neig_unemployment(neighborhood: str, num_page: int = 0):
+    res = find_collection("Unemployment", {"Neighborhood Name": neighborhood})
     page = paginate(num_page)
     return loads(json_util.dumps(page(res)))
 
 
 # information of the unemployment in BCN depending on the district
-@router.get("/district/unemployment/{district}")
-def district_unemployment(district: int, num_page: int = 0):
-    res = find_collection("Unemployment", {"District Code": district})
+@router.get("/district/unemployment/{district}/{num_page}")
+def district_unemployment(district: str, num_page: int = 0):
+    res = find_collection("Unemployment", {"District Name": district, "Year": 2017})
     page = paginate(num_page)
     return loads(json_util.dumps(page(res)))
 

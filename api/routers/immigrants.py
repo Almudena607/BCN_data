@@ -26,32 +26,40 @@ def get_immigrants(num_page: int = 0):
     res = page(find_collection("Immigrants"))
     return res
 
-"""#returns the nationalities of the immigrants
-@router.get("/immigrant/nation_list")
-def distinct_nationality():
-    res = db["Immigrants"].find({}).distinct("Nationality")
-    return loads(json_util.dumps(res))
-"""
 
 # information of the immigrants in BCN depending on the neighborhood
-@router.get("/neighborhood/immigrants/{neighborhood}")
-def neig_immigrants(neighborhood: int, num_page: int = 0):
-    res = find_collection("Immigrants", {"Neighborhood Code": neighborhood})
+@router.get("/neighborhood/immigrants/{neighborhood}/{num_page}")
+def neig_immigrants(neighborhood: str, num_page: int = 0):
+    res = find_collection("Immigrants", {"Neighborhood Name": neighborhood, "Year": 2017})
     page = paginate(num_page)
     return loads(json_util.dumps(page(res)))
 
 
 # information of the immigrants in BCN depending on the district
-@router.get("/district/immigrants/{district}")
-def district_immigrants(district: int, num_page: int = 0):
-    res = find_collection("Immigrants", {"District Code": district})
+@router.get("/district/immigrants/{district}/{num_page}")
+def district_immigrants(district: str, num_page: int=0):
+    res = find_collection("Immigrants", {"District Name": district, "Year": 2017})
     page = paginate(num_page)
     return loads(json_util.dumps(page(res)))
 
 
 # information of the immigrants in BCN depending on their nationality
-@router.get("/nationality/immigrants/{nationality}")
+@router.get("/nationality/immigrants/{nationality}/{num_page}")
 def nationality_immigrants(nationality: str, num_page: int = 0):
-    res = find_collection("Immigrants", {"Nationality": nationality})
+    res = find_collection("Immigrants", {"Nationality": nationality, "Year": 2017})
     page = paginate(num_page)
     return loads(json_util.dumps(page(res)))
+
+
+# muestra el nombre de todas las nacionalidades
+@router.get("/nationality/all")
+def distinct_nationality():
+    res = db["Immigrants"].find({"Year": 2017}).distinct("Nationality")
+    return loads(json_util.dumps(res))
+
+
+# muestra el nombre de todas los distritos
+@router.get("/district/all")
+def distinct_district():
+    res = db["Immigrants"].find({"Year": 2017}).distinct("District Name")
+    return loads(json_util.dumps(res))
