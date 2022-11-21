@@ -12,8 +12,6 @@ pymongo == 4.3.2
 
 #limpieza y analisis de datos
 pandas == 15.1
-numpy == 1.23.0
-matplotlib == 3.5.3
 
 #streamlit
 streamlit == 1.14.1
