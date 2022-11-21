@@ -1,6 +1,6 @@
 # BCN_data
 
-../imagen/barcelona.png'
+![Barrios y distritos de Barcelona](./imagen/barcelona.png?raw=true "Barrios y distritos de Barcelona")
 
 <b>Autora:</b> Almudena Ramírez Haro
 
