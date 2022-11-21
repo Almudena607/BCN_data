@@ -6,28 +6,6 @@ from json import loads
 router = APIRouter()
 
 
-# https://fastapi.tiangolo.com/tutorial/query-params/?h=query+pa
-
-
-@router.get("/immigrants")
-def get_immigrants(num_page: int = 0):
-    print(f"Fetching page {num_page}")
-
-    # Validate page number
-
-    if num_page < 0:
-        raise HTTPException(
-            status_code=400, detail="num_page must be a positive integer")
-
-    # Configure paginator with query parameters
-    page = paginate(num_page)
-
-    # Fetch page data
-    res = page(find_collection("Immigrants"))
-    return res
-
-
-
 # information of the immigrants in BCN depending on the district
 @router.get("/district/immigrants/{district}/{num_page}")
 def district_immigrants(district: str, num_page: int=0):
@@ -56,3 +34,22 @@ def distinct_nationality():
 def distinct_district():
     res = db["Immigrants"].find({"Year": 2017}).distinct("District Name")
     return loads(json_util.dumps(res))
+
+
+
+@router.get("/immigrants")
+def get_immigrants(num_page: int = 0):
+    print(f"Fetching page {num_page}")
+
+    # Validate page number
+
+    if num_page < 0:
+        raise HTTPException(
+            status_code=400, detail="num_page must be a positive integer")
+
+    # Configure paginator with query parameters
+    page = paginate(num_page)
+
+    # Fetch page data
+    res = page(find_collection("Immigrants"))
+    return res

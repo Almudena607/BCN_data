@@ -21,7 +21,7 @@ formato1("Este proyecto pretende mostrar la tasa de desempleo e inmigración en 
 formato1("Leyenda de distritos y barrios de Barcelona", 35, "white")  
 col1, col2, col3 = st.columns(3)
 with col1:
-    st.text("1. Ciudad Vieja:\n 1.1. El Raval\n 1.2. Barrio Gótico\n 1.3. La Barceloneta\n 1.4. Sant Pere, Santa Caterina i la Ribera\n\n2. L'Eixample:\n 2.1. El Fort Pienc\n 2.2. Sagrada Familia\n 2.3. La Dreta de L'Eixample\n 2.4. Antiga Esquerra de l'Eixample\n 2.5. Nova Esquerra de l'Eixample\n 2.6. Sant Antoni\n\n3. Sants-Montjuïc:\n 3.1. El Poble Sec\n 3.2. La Marina del Prat Vermell\n 3.3. La Marina de Port\n 3.4. La Font de la Guatlla\n 3.5. Hostafrancs\n 3.6. La Bordeta\n 3.7. Sants-Badal\n 3.8. Sants\n 3.9. Parc de Montjuic\n 3.10. Zona Franca-Port\n\n4. Les Corts\n 4.1. Les Corts\n 4.2. La Maternitat i San Ramón\n 4.3. Pedralbes")
+    st.text("1. Ciutat Vella:\n 1.1. El Raval\n 1.2. El Gòtic\n 1.3. La Barceloneta\n 1.4. Sant Pere, Santa Caterina i la Ribera\n\n2. L'Eixample:\n 2.1. El Fort Pienc\n 2.2. Sagrada Familia\n 2.3. La Dreta de L'Eixample\n 2.4. Antiga Esquerra de l'Eixample\n 2.5. Nova Esquerra de l'Eixample\n 2.6. Sant Antoni\n\n3. Sants-Montjuïc:\n 3.1. El Poble Sec\n 3.2. La Marina del Prat Vermell\n 3.3. La Marina de Port\n 3.4. La Font de la Guatlla\n 3.5. Hostafrancs\n 3.6. La Bordeta\n 3.7. Sants-Badal\n 3.8. Sants\n 3.9. Parc de Montjuic\n 3.10. Zona Franca-Port\n\n4. Les Corts\n 4.1. Les Corts\n 4.2. La Maternitat i San Ramón\n 4.3. Pedralbes")
 with col2:
     st.text("5. Sarrià-Sant Gervasi:\n 5.1. Vallvidrera, Tibidabo i les Planes\n 5.2. Sarrià\n 5.3. Las Tres Torres\n 5.4. Sant Gervasi-Bonanova\n 5.5. Sant Gervasi-Galvany\n 5.6. El Putget i Farró\n\n6. Gràcia:\n 6.1. Vallcarca i els Penitents\n 6.2. El Coll\n 6.3. La Salut\n 6.4. Vila de Gràcia\n 6.5. El Camp d’en Grassot i Gràcia Nova\n\n7. Horta-Guinardó:\n 7.1. Baix Guinardó\n 7.2. Can Baró\n 7.3. El Guinardó\n 7.4. La Font d’en Fargues\n 7.5. El Carmel\n 7.6. La Teixonera\n 7.7. Sant Genís dels Agudells\n 7.8. Montbau\n 7.9. La Vall d’Hebron\n 7.10. La Clota\n 7.11. Horta")
 with col3:
@@ -42,7 +42,7 @@ distrito_inmigrantes()
 
 #### --------------------------------------------DESEMPLEO--------------------------------------------
 formato1("Análisis de desempleo", 35, "white")  
-st.text("A continuación se muestran la visualización de los datos de desempleo, sacados de 'unemployment.csv'. El archivo tiene la misma estructura que los datos\nde inmigración, aunque sin datos de nacionalidad y con entradas para el mes el registro, el género y si es solamente desempleado o está en búsqueda activa de empleo.") 
+st.text("A continuación se muestran la visualización de los datos de desempleo, sacados de 'unemployment.csv'. El archivo tiene la misma estructura que los datos\nde inmigración con entradas para el mes el registro, el género y si es solamente desempleado o está en búsqueda activa de empleo.") 
 
 
 formato2("Datos de demanda de empleo en función del barrio", 20, "grey")

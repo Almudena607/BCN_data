@@ -12,7 +12,9 @@ def barrio_inmigrantes():
 
     #boxes to select the district and the page
     distrito = st.selectbox("Selecciona un distrito para ver las nacionalidades de cada barrio:", all_district())
-    pag_lines = [0,1,2,3,4,5,6,7] 
+    pag_lines = []
+    for num in range (0, 63):
+        pag_lines.append(num)
     n = st.selectbox("Selecciona la página para ver distintos barrios y distintas nacionalidades:", pag_lines)
 
 
@@ -39,6 +41,7 @@ def barrio_inmigrantes():
     
     fig = pe.bar(df, x=barrio, y=inmigrantes, color=nacionalidad, labels={'x':'Barrios', 'y':'Tasa inmigración'})   
     st.write(fig)
+
 
 
 
@@ -79,7 +82,9 @@ def distrito_inmigrantes():
 def barrio_desempleo():
 
     distrito = st.selectbox("Selecciona un distrito para ver los datos de desempleo de cada barrio:", all_district())
-    pag_lines = [0,1,2,3,4,5,6,7] 
+    pag_lines = []
+    for num in range (0, 20):
+        pag_lines.append(num)
     n = st.selectbox("Selecciona la página para ver distintos barrios y los datos de desempleo de cada uno:", pag_lines)
 
     a = get_unemployed_neighborhood(distrito, n)
@@ -109,7 +114,9 @@ def barrio_desempleo():
 def genero_desempleo():
 
     distrito = st.selectbox("Selecciona un distrito para ver el género de las personas desempleadas de cada barrio:", all_district())
-    pag_lines = [0,1,2,3,4,5,6,7] 
+    pag_lines = []
+    for num in range (0, 20):
+        pag_lines.append(num)
     n = st.selectbox("Selecciona la página para ver distintos barrios y el género de las personas desempleadas:", pag_lines)
 
     a = get_unemployed_neighborhood(distrito, n)
