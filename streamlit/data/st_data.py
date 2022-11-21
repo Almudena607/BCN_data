@@ -43,6 +43,3 @@ def get_total(neighborhood):
     return requests.get(STURL + f"/totalpopulation/{neighborhood}").json()
 
 
-def immigrants_nationality(nationality):
-    return requests.get(STURL + f"/nationality/immigrants/{nationality}").json()
-

@@ -27,13 +27,6 @@ def get_immigrants(num_page: int = 0):
     return res
 
 
-# information of the immigrants in BCN depending on the neighborhood
-@router.get("/neighborhood/immigrants/{neighborhood}/{num_page}")
-def neig_immigrants(neighborhood: str, num_page: int = 0):
-    res = find_collection("Immigrants", {"Neighborhood Name": neighborhood, "Year": 2017})
-    page = paginate(num_page)
-    return loads(json_util.dumps(page(res)))
-
 
 # information of the immigrants in BCN depending on the district
 @router.get("/district/immigrants/{district}/{num_page}")

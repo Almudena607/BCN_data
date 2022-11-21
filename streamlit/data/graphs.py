@@ -8,13 +8,12 @@ from plotly.subplots import make_subplots
 
 
 #--------------------------------------------GRÁFICOS INMIGRACIÓN------------------------------- 
-########!!!!!!!! 
 def barrio_inmigrantes():
 
     #boxes to select the district and the page
-    distrito = st.selectbox("Selecciona el distrito:", all_district())
+    distrito = st.selectbox("Selecciona un distrito para ver las nacionalidades de cada barrio:", all_district())
     pag_lines = [0,1,2,3,4,5,6,7] 
-    n = st.selectbox("Seleccsjfgjshkgb los datos de la inmigración de empleo en función del barrio:", pag_lines)
+    n = st.selectbox("Selecciona la página para ver distintos barrios y distintas nacionalidades:", pag_lines)
 
 
     #getting the data
@@ -38,7 +37,7 @@ def barrio_inmigrantes():
 
     #drawing the graphs
     
-    fig = pe.bar(df, x=barrio, y=inmigrantes, color=nacionalidad)   
+    fig = pe.bar(df, x=barrio, y=inmigrantes, color=nacionalidad, labels={'x':'Barrios', 'y':'Tasa inmigración'})   
     st.write(fig)
 
 
@@ -46,9 +45,9 @@ def barrio_inmigrantes():
 def distrito_inmigrantes():
 
     #boxes to select the nationality and the page
-    nationality = st.selectbox("Selecciona el país para ver los datos de esa nacionalidad:", all_nationality())
+    nationality = st.selectbox("Selecciona el país para ver los datos de esa nacionalidad en cada barrio:", all_nationality())
     pag_lines = [0,1,2,3,4,5,6,7] 
-    n = st.selectbox("Selecciona la página para bhsjfks los datos de inmigrantes según el distrito:", pag_lines)
+    n = st.selectbox("Selecciona la página para ver distintos distritos y la nacionalidad de los inmigrantes registrados en cada barrio:", pag_lines)
 
     #getting the data
     a = get_immigrants_nationality(nationality, n)
@@ -79,9 +78,9 @@ def distrito_inmigrantes():
 
 def barrio_desempleo():
 
-    distrito = st.selectbox("Selecciona mdfbn mc distrito:", all_district())
+    distrito = st.selectbox("Selecciona un distrito para ver los datos de desempleo de cada barrio:", all_district())
     pag_lines = [0,1,2,3,4,5,6,7] 
-    n = st.selectbox("Selecciona la fhjdscbhsak para ver los datos de la demanda de empleo en función del barrio:", pag_lines)
+    n = st.selectbox("Selecciona la página para ver distintos barrios y los datos de desempleo de cada uno:", pag_lines)
 
     a = get_unemployed_neighborhood(distrito, n)
     df = pd.DataFrame(a)
@@ -109,9 +108,9 @@ def barrio_desempleo():
 
 def genero_desempleo():
 
-    distrito = st.selectbox("Selecdfjgnlkciona mdfbn mc distrito:", all_district())
+    distrito = st.selectbox("Selecciona un distrito para ver el género de las personas desempleadas de cada barrio:", all_district())
     pag_lines = [0,1,2,3,4,5,6,7] 
-    n = st.selectbox("Seleccionadsijklhjdscbhsak para ver los datos de la demanda de empleo en función del barrio:", pag_lines)
+    n = st.selectbox("Selecciona la página para ver distintos barrios y el género de las personas desempleadas:", pag_lines)
 
     a = get_unemployed_neighborhood(distrito, n)
     df = pd.DataFrame(a)
@@ -144,7 +143,7 @@ def genero_desempleo():
 def inmi_barrio():
     #box to select the page
     pag_lines = [0,1,2,3,4,5,6,7] 
-    n = st.selectbox("Selecciona la pág para ver los datos de inmigrantes según el barrio:", pag_lines)
+    n = st.selectbox("Selecciona la página para ver distintos barrios y su tasa de inmigración:", pag_lines)
 
     #getting the data
     df = pd.DataFrame.from_dict(get_neighborhoods(n))
@@ -165,14 +164,14 @@ def inmi_barrio():
                     desempleados.append(v["Total Unemployed"])
 
     #drawing the line plot
-    fig = pe.line(x=barrios, y=inmigrantes, labels={'x':'', 'y':'Inmigrantes'})
+    fig = pe.line(x=barrios, y=inmigrantes, labels={'x':'', 'y':'Tasa inmigración'})
 
     st.write(fig)
 
 def desempl_barrio():
     #box to select the page
     pag_lines = [0,1,2,3,4,5,6,7] 
-    n = st.selectbox("Selecciona la página para ver los datos de desempleados según el barrio:", pag_lines)
+    n = st.selectbox("Selecciona la página para ver distintos barrios y su tasa de desempleo:", pag_lines)
 
     #getting the data
     df = pd.DataFrame.from_dict(get_neighborhoods(n))
@@ -193,7 +192,7 @@ def desempl_barrio():
                     desempleados.append(v["Total Unemployed"])
 
     #drawing the line plot
-    fig = pe.line(x=barrios, y=desempleados, labels={'x':'', 'y':'Desempleados'})
+    fig = pe.line(x=barrios, y=desempleados, labels={'x':'', 'y':'Tasa desempleo'})
 
     st.write(fig)
 
@@ -201,7 +200,7 @@ def desempl_barrio():
 def total_barrio():
     #box to select the page
     pag_lines = [0,1,2,3,4,5,6,7] 
-    n = st.selectbox("Selecciona la pagina para ver los datos de población total según el barrio:", pag_lines)
+    n = st.selectbox("Selecciona la página para ver los datos de población total según el barrio:", pag_lines)
 
     #getting the data
     df = pd.DataFrame.from_dict(get_neighborhoods(n))
@@ -222,16 +221,16 @@ def total_barrio():
                     desempleados.append(v["Total Unemployed"])
 
     #drawing the line plot
-    fig = pe.line(x=barrios, y=poblacion, labels={'x':'', 'y':'Población'})
+    fig = pe.line(x=barrios, y=poblacion, labels={'x':'', 'y':'Población total'})
 
     st.write(fig)
 
 
-# aquí pone cómo hacer este gráfico mejor -> https://plotly.com/python/line-and-scatter/
+# gráfico relación inmigración-desempleo-total población
 def sub_pl():
     #box to select the page
     pag_lines = [0,1,2,3,4,5,6,7] 
-    n = st.selectbox("Ir a la gág.", pag_lines)
+    n = st.selectbox("Selecciona la página para ver distintos barrios y la relación inmigración-desempleo de cada uno:", pag_lines)
 
     #getting the data
     df = pd.DataFrame.from_dict(get_neighborhoods(n))
@@ -267,9 +266,14 @@ def sub_pl():
         secondary_y=True,
     )
 
+    fig.add_trace(
+        go.Scatter(x=barrios, y=poblacion, name="Población total"),
+        secondary_y=True,
+    )
+
     # Add figure title
     fig.update_layout(
-        title_text="Double Y Axis Example"
+        title_text="Relación tasa inmigración y desempleo"
     )
 
     # Set x-axis title
@@ -278,103 +282,6 @@ def sub_pl():
     # Set y-axes titles
     fig.update_yaxes(title_text="<b>Inmigración</b>", secondary_y=False)
     fig.update_yaxes(title_text="<b>Desempleo</b>", secondary_y=True)
+    fig.update_yaxes(title_text="<b>Total</b>", secondary_y=True)
 
     st.write(fig)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#--------------------------------------------GRÁFICOS POBLACIÓN-------------------------------
-#x barrio y number c edad
-#def edades_poblacion():
-
-#    distrito = st.selectbox("Selecdfjgnlkciondsfnma mdfbn mc distrito:", all_district())
-#    pag_lines = [0,1,2,3,4,5,6,7] 
-#    n = st.selectbox("Seleccionadsijklhjdscbhdnfjksak para ver los datos de la demanda de empleo en función del barrio:", pag_lines)
-
-#    a = get_population_neighborhood(distrito, n)
-#    df = pd.DataFrame(a)
-#    distritos = []
-#    barrio = []
-#    genero = []
-#    total = []
-#    edad = []
-#    for _, data in df.iterrows():
-#        for dicc in df["results"]:
-#            for c in dicc:
-#                if c == "District.Name":
-#                    distritos.append(dicc["District.Name"])
-#                elif "Number" == c:
-#                    total.append(dicc["Number"])
-#                elif "Neighborhood.Name" == c:
-#                    barrio.append(dicc["Neighborhood.Name"])
-#                elif "Gender" == c:
-#                    genero.append(dicc["Gender"])     
-#                elif "Age" == c:
-#                    edad.append(dicc["Age"])    
-
-#    fig = pe.bar(df, x=barrio, y=total, color=edad, labels={'x':'Barrio', 'y': 'Población total'})               
-#    st.write(fig) 
-
-
-
-"""def genero_poblacion():
-
-    distrito = st.selectbox(" mdfbn mdfgc distrito:", all_district())
-    pag_lines = [0,1,2,3,4,5,6,7] 
-    n = st.selectbox("Seleccionadsijklhjdscbhsak vnc ver los datos de la demanda de empleo en función del barrio:", pag_lines)
-
-    a = get_population_neighborhood(distrito, n)
-    df = pd.DataFrame(a)
-    distritos = []
-    barrio = []
-    genero = []
-    total = []
-    edad = []
-    for _, data in df.iterrows():
-        for dicc in df["results"]:
-            for c in dicc:
-                if c == "District.Name":
-                    distritos.append(dicc["District.Name"])
-                elif "Number" == c:
-                    total.append(dicc["Number"])
-                elif "Neighborhood.Name" == c:
-                    barrio.append(dicc["Neighborhood.Name"])
-                elif "Gender" == c:
-                    genero.append(dicc["Gender"])     
-                elif "Age" == c:
-                    edad.append(dicc["Age"])    
-
-    fig = pe.bar(df, x=barrio, y=total, color=genero, labels={'x':'Barrio', 'y': 'Población total'})               
-    st.write(fig)
-"""
